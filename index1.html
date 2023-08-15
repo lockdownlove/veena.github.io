@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+      <meta name="viewpot" content="width=device-width, initial-scale=1.0">
+      <title>Music Player Design</title>
+      <link rel="stylesheet" href="style1.css">
+ <script src="https://kit.fontawesome.com/29be7f1a27.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+ <div class="container">
+  <div class="music">
+
+     <nav>
+    <div class="circle">
+<i class="fa-solid fa-angle-left"></i>
+</div>
+
+<div class="circle">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+  </nav>
+
+  <img src="media/DSC_5260.JPG" class="song-img">
+<h1> Leja Leja Re </h1>
+<p>for someone special</p>
+
+
+ 
+<audio id="song">
+<source src="media/song1.mp3" type="audio/mpeg">
+</audio>
+
+<input type="range"  value="0" id="progress">
+
+<div class="controls">
+<div><i class="fa-solid fa-backward"></i></div>
+<div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+<div><i class="fa-solid fa-forward"></i></div>
+
+</div>
+
+
+</div>
+
+</div>
+ 
+<script>
+ let progress = document.getElementById("progress");
+ let song = document.getElementById("song");
+ let ctrlIcon = document.getElementById("ctrlIcon");
+
+
+song.onloadedmetadata = function(){
+progress.max = song.duration;
+progress.value = song.currentTime;
+}
+ 
+function playPause(){
+if(ctrlIcon.classList.contains("fa-pause")){
+song.pause();
+ctrlIcon.classList.remove("fa-pause");
+ ctrlIcon.classList.add("fa-play");
+
+}
+else{
+song.play();
+ctrlIcon.classList.add("fa-pause");
+ ctrlIcon.classList.remove("fa-play");
+}
+
+}
+
+if(song.play()){
+setInterval(()=>{
+progress.value = song.currentTime;
+},500);
+}
+
+progress.onchange = function(){
+song.play();
+song.currentTime = progress.value;
+ctrlIcon.classList.add("fa-play");
+ ctrlIcon.classList.remove("fa-pause");
+}
+
+
+</script>
+
+
+</body>
+</html>
